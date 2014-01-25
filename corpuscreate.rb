@@ -1,47 +1,50 @@
 require 'google-search'
-load "/home/papri/algoboot.rb"
+load "/home/papri/dqscripts/algoboot.rb"
 
 #@cats ={"Sequence sorting"=>["Bubble sort"]}
 
 @corpus = {}
-@corpus["Sequence sorting"] = {}
-puts @corpus
 
-@cats["Sequence sorting"].each do |t|
-puts t
-@gpages = []
+@cats.each do |k,v|
 
-Google::Search::Web.new(:query => t).each do |w|
-	@gpages << [w.title,w.uri]
-end 
+	@corpus[k] = {}
+	puts @corpus
+
+	v.each do |t|
+		puts t
+		@gpages = []
+
+		Google::Search::Web.new(:query => t).each do |w|
+			@gpages << [w.title,w.uri]
+		end 
 
 
-whiteregex = /en.wikipedia|youtube|rosetta|geeksforgeeks|cprogramming.com|personal.kent|nist|algolist|wikiversity|wolfram|programmingsimplified/
-blackregex = /wikimedia|.pdf|.doc|.txt|.ppt|itunes|khan|blogspot|.gif|.pps|nanamic|freevbcode|scratched|download|reddit|interactivepython.org|google|yahoo|prezi|amazon|cyclopaedia|reference|researchgate|quitebasic|download/
+	whiteregex = /en.wikipedia|youtube|rosetta|geeksforgeeks|cprogramming.com|personal.kent|nist|algolist|wikiversity|wolfram|programmingsimplified/
+	blackregex = /wikimedia|.pdf|.doc|.txt|.ppt|itunes|khan|blogspot|.gif|.pps|nanamic|freevbcode|scratched|download|reddit|interactivepython.org|google|yahoo|prezi|amazon|cyclopaedia|reference|researchgate|quitebasic|download/
 
-@resources = []
-@uniquelinks = []
+	@resources = []
+	@uniquelinks = []
 
-@gpages.each do |t,l|
-	if l =~ whiteregex
-		@resources << [t,l]
-		@uniquelinks << l
+	@gpages.each do |t,l|
+		if l =~ whiteregex
+			@resources << [t,l]
+			@uniquelinks << l
+		end
 	end
-end
 
 # Duckduckgo results extraction
 
-@doc = Nokogiri::HTML(open("https://api.duckduckgo.com/html?q="+t.gsub(/ |_/,"+")))
-x = @doc.css(".web-result-sponsored")
-x.remove
-@carrier = @doc.css("div.web-result a.large")
-puts @carrier.length
-@carrier.each do |c|
-	if !@uniquelinks.join.include?(c["href"].gsub(/https:\/\/|http:\/\//,"")) and !(c["href"] =~ blackregex)
-		@resources << [c.text,c["href"]]
-		@uniquelinks << c["href"]
+	@doc = Nokogiri::HTML(open(URI.encode("https://api.duckduckgo.com/html?q="+t.gsub(/ |_/,"+"))))
+	x = @doc.css(".web-result-sponsored")
+	x.remove
+	@carrier = @doc.css("div.web-result a.large")
+	puts @carrier.length
+	@carrier.each do |c|
+		if !@uniquelinks.join.include?(c["href"].gsub(/https:\/\/|http:\/\//,"")) and !(c["href"] =~ blackregex)
+			@resources << [c.text,c["href"]]
+			@uniquelinks << c["href"]
+		end
 	end
-end
 
 
 #saving the whitelist resources
@@ -87,9 +90,9 @@ end
 #	j = j + 1
 #end
 
-puts @resources
-@corpus["Sequence sorting"][t] = @resources
+	puts @resources
+	@corpus["Sequence sorting"][t] = @resources
 
 end
-
+end
 
