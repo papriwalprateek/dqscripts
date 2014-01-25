@@ -91,7 +91,7 @@ load "/home/papri/dqscripts/algoboot.rb"
 #end
 
 	puts @resources
-	@corpus["Sequence sorting"][t] = @resources
+	@corpus[k][t] = @resources
 
 end
 end
