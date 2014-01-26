@@ -28,4 +28,6 @@ download|
 animated|
 compiledreams|
 facebook|
-sciencedirect
+sciencedirect|
+barnesandnoble|
+opensourcescripts
