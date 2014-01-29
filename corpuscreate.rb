@@ -1,8 +1,8 @@
 require 'google-search'
-load "/home/papri/dqscripts/algoboot.rb"
+#load "/home/papri/dqscripts/algoboot.rb"
 load '/home/papri/Downloads/dqscripts/svm_predict.rb'
 
-#@cats ={"Sequence sorting"=>["Karger's algorithm"]}
+@cats ={"Sequence sorting"=>["Bubble sort", "Sample sort"]}
 
 
 @corpus = {}
@@ -34,6 +34,16 @@ load '/home/papri/Downloads/dqscripts/svm_predict.rb'
 			@uniquelinks << l
 		end
 	end
+
+#	10.times do |j|
+#		if !(@gpages[j][1] =~ whiteregex) and !(@gpages[j][1] =~ blackregex)
+#			if svm_predict(@gpages[j][1]) == 1.0
+#				puts @gpages[j][1]
+#				@resources << @gpages[j]
+#				@uniquelinks << @gpages[j][1]
+#			end
+#		end
+#	end
 
 # Duckduckgo results extraction
 
