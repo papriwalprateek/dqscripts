@@ -1,7 +1,9 @@
 require 'google-search'
 load "/home/papri/dqscripts/algoboot.rb"
+load '/home/papri/Downloads/dqscripts/svm_predict.rb'
 
-#@cats ={"Sequence sorting"=>["Bubble sort"]}
+#@cats ={"Sequence sorting"=>["Karger's algorithm"]}
+
 
 @corpus = {}
 
@@ -20,7 +22,8 @@ load "/home/papri/dqscripts/algoboot.rb"
 
 
 	whiteregex = /en.wikipedia|youtube|rosetta|geeksforgeeks|cprogramming.com|personal.kent|nist|algolist|wikiversity|wolfram|programmingsimplified/
-	blackregex = /wikimedia|.pdf|.doc|.txt|.ppt|itunes|khan|blogspot|.gif|.pps|nanamic|freevbcode|scratched|download|reddit|interactivepython.org|google|yahoo|prezi|amazon|cyclopaedia|reference|researchgate|quitebasic|download/
+	blackregex = /wikimedia|.pdf|.doc|.txt|.ppt|itunes|khanacademy|blogspot|.gif|.pps|nanamic|freevbcode|scratched|download|reddit|interactivepython.org|google|yahoo|prezi|amazon|cyclopaedia|reference|researchgate|quitebasic|download|animated|compiledreams|facebook|sciencedirect|barnesandnoble|opensourcescripts|slideshare|sriptol|scribd|sourcecode|teachingtree/
+
 
 	@resources = []
 	@uniquelinks = []
@@ -28,7 +31,6 @@ load "/home/papri/dqscripts/algoboot.rb"
 	@gpages.each do |t,l|
 		if l =~ whiteregex
 			@resources << [t,l]
-			@uniquelinks << l
 		end
 	end
 
@@ -40,8 +42,10 @@ load "/home/papri/dqscripts/algoboot.rb"
 	@carrier = @doc.css("div.web-result a.large")
 	puts @carrier.length
 	@carrier.each do |c|
-		if !@uniquelinks.join.include?(c["href"].gsub(/https:\/\/|http:\/\//,"")) and !(c["href"] =~ blackregex)
-			@resources << [c.text,c["href"]]
+	    pred = svm_predict(c["href"])
+		if !@uniquelinks.join.include?(c["href"].gsub(/https:\/\/|http:\/\//,"")) and !(c["href"] =~ blackregex) and pred == 1.0
+			puts c["href"]
+			@resources << [c.text,c["href"]]			
 			@uniquelinks << c["href"]
 		end
 	end
