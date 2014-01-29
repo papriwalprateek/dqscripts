@@ -6,7 +6,6 @@ load '/home/papri/Downloads/dqscripts/svm_predict.rb'
 
 
 @corpus = {}
-
 @cats.each do |k,v|
 
 	@corpus[k] = {}
@@ -30,7 +29,9 @@ load '/home/papri/Downloads/dqscripts/svm_predict.rb'
 
 	@gpages.each do |t,l|
 		if l =~ whiteregex
+			puts l
 			@resources << [t,l]
+			@uniquelinks << l
 		end
 	end
 
@@ -40,11 +41,10 @@ load '/home/papri/Downloads/dqscripts/svm_predict.rb'
 	x = @doc.css(".web-result-sponsored")
 	x.remove
 	@carrier = @doc.css("div.web-result a.large")
-	puts @carrier.length
 	@carrier.each do |c|
-	    pred = svm_predict(c["href"])
+		pred = svm_predict(c["href"])
 		if !@uniquelinks.join.include?(c["href"].gsub(/https:\/\/|http:\/\//,"")) and !(c["href"] =~ blackregex) and pred == 1.0
-			puts c["href"]
+	  		puts c["href"]
 			@resources << [c.text,c["href"]]			
 			@uniquelinks << c["href"]
 		end
@@ -93,8 +93,6 @@ load '/home/papri/Downloads/dqscripts/svm_predict.rb'
 #	end
 #	j = j + 1
 #end
-
-	puts @resources
 	@corpus[k][t] = @resources
 
 end
