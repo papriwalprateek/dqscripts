@@ -1,17 +1,21 @@
 require 'google-search'
-#load "/home/papri/dqscripts/algoboot.rb"
+load "/home/papri/Downloads/git_work/dqscripts/algoboot.rb"
 load '/home/papri/Downloads/git_work/dqscripts/svm/svm_predict.rb'
+load '/home/papri/Downloads/git_work/dqscripts/corpus.rb'
 
-@cats ={"Graph algorithm"=>["Prim's algorithm"]}
+
+#@cats ={"Graph algorithm"=>["Prim's algorithm"]}
 
 
-@corpus = {}
-@cats.each do |k,v|
+#@corpus = {}
+#@cats.each do |k,v|
 
-	@corpus[k] = {}
+	c_add = "Graph algorithms"
+
+	@corpus[c_add] = {}
 	puts @corpus
 
-	v.each do |t|
+	@cats[c_add].each do |t|
 		puts t
 		@gpages = []
 
@@ -65,8 +69,8 @@ load '/home/papri/Downloads/git_work/dqscripts/svm/svm_predict.rb'
 #saving the whitelist resources
 
 
-	@corpus[k][t] = @resources
+	@corpus[c_add][t] = @resources
 
 end
-end
+
 

@@ -2,7 +2,7 @@ require 'google-search'
 #load "/home/papri/dqscripts/algoboot.rb"
 load '/home/papri/Downloads/git_work/dqscripts/svm/svm_predict.rb'
 
-@cats ={"Graph algorithm"=>["Prim's algorithm"]}
+@cats ={"Sequence sorting"=>["Bubble sort", "Sample sort"]}
 
 
 @corpus = {}
@@ -21,7 +21,7 @@ load '/home/papri/Downloads/git_work/dqscripts/svm/svm_predict.rb'
 
 
 	whiteregex = /en.wikipedia|youtube|rosetta|geeksforgeeks|cprogramming.com|personal.kent|nist|algolist|wikiversity|wolfram|programmingsimplified/
-	blackregex = /wikimedia|.pdf|.doc|.txt|.ppt|itunes|khanacademy|blogspot|.gif|.pps|nanamic|freevbcode|scratched|download|reddit|interactivepython.org|google|yahoo|prezi|amazon|cyclopaedia|reference|researchgate|quitebasic|download|animated|compiledreams|facebook|sciencedirect|barnesandnoble|opensourcescripts|slideshare|sriptol|scribd|sourcecode|teachingtree|yahoo/
+	blackregex = /wikimedia|.pdf|.doc|.txt|.ppt|itunes|khanacademy|blogspot|.gif|.pps|nanamic|freevbcode|scratched|download|reddit|interactivepython.org|google|yahoo|prezi|amazon|cyclopaedia|reference|researchgate|quitebasic|download|animated|compiledreams|facebook|sciencedirect|barnesandnoble|opensourcescripts|slideshare|sriptol|scribd|sourcecode|teachingtree/
 
 
 	@resources = []
@@ -53,7 +53,6 @@ load '/home/papri/Downloads/git_work/dqscripts/svm/svm_predict.rb'
 	@carrier = @doc.css("div.web-result a.large")
 	@carrier.each do |c|
 		pred = svm_predict(c["href"])
-		puts pred
 		if !@uniquelinks.join.include?(c["href"].gsub(/https:\/\/|http:\/\//,"")) and !(c["href"] =~ blackregex) and pred == 1.0
 	  		puts c["href"]
 			@resources << [c.text,c["href"]]			
@@ -64,7 +63,46 @@ load '/home/papri/Downloads/git_work/dqscripts/svm/svm_predict.rb'
 
 #saving the whitelist resources
 
+#j = 0
+#while j < @gtitle.length
+#	flag = 0
+#	whitelist.each do |w|
+##		if @glinks[j].include?(w)
+#			flag = 1
+#		end
+#	end
+#	
+#	if flag == 1
+#		dup = [@gtitle[j],@glinks[j]]#
+#		@gtitle.delete(@gtitle[j])
+#		@glinks.delete(@glinks[j])
+#		@resources << dup
+#	end
+#	j = j + 1
+#end
 
+
+
+#saving resources while ignoring blacklist resources
+
+#j = 0 
+#while j < @gtitle.length
+#	flag = 1
+#	blacklist.each do |b|
+#		if @glinks[j].include?(b)
+#			flag = 0
+#		end
+#	end
+#	
+#	if flag == 1
+#		dup = [@gtitle[j],@glinks[j]]
+#		@resources << dup
+#	end
+#	if @resources.length > 14
+#		break
+#	end
+#	j = j + 1
+#end
 	@corpus[k][t] = @resources
 
 end
