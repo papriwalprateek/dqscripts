@@ -53,7 +53,7 @@ load '/home/papri/Downloads/git_work/dqscripts/svm/svm_predict.rb'
 	@carrier = @doc.css("div.web-result a.large")
 	@carrier.each do |c|
 		pred = svm_predict(c["href"])
-		if !@uniquelinks.join.include?(c["href"].gsub(/https:\/\/|http:\/\//,"")) and !(c["href"] =~ blackregex) and pred == 1.0
+		if !@uniquelinks.join.include?(c["href"].gsub(/https:\/\/|http:\/\//,"")) and !(c["href"] =~ blackregex) and pred == 1.0 
 	  		puts c["href"]
 			@resources << [c.text,c["href"]]			
 			@uniquelinks << c["href"]
