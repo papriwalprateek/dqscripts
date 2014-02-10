@@ -1,18 +1,18 @@
 # encoding: UTF-8
 require 'google-search'
-load "/home/papri/Downloads/git_work/dqscripts/algoboot.rb"
+#load "/home/papri/Downloads/git_work/dqscripts/algoboot.rb"
 load '/home/papri/Downloads/git_work/dqscripts/svm/svm_predict.rb'
-load '/home/papri/Downloads/git_work/dqscripts/corpus.rb'
+load '/home/papri/Downloads/git_work/dqscripts/svm/corpus.rb'
 
 
-#@cats = {"Dynamic Programming" => ["Dynamic time warping", "Earley parser", "Floyd–Warshall algorithm", "Forward–backward algorithm", "Hamilton–Jacobi–Bellman equation", "Hirschberg's algorithm", "Hunt–McIlroy algorithm", "Knapsack problem", "Levenshtein distance", "Longest alternating subsequence", "Longest common subsequence problem", "Longest common substring problem", "Longest increasing subsequence", "Markov decision process", "Matrix chain multiplication", "Maximum subarray problem", "Needleman–Wunsch algorithm", "Optimal stopping", "Optimal substructure", "Overlapping subproblems", "Partially observable Markov decision process", "Recursive economics", "Shortest common supersequence", "Smith–Waterman algorithm", "Subset sum problem", "Viscosity solution", "Viterbi algorithm", "Word wrap"]}
+@cats = {"Dynamic Programming" => ["Partially observable Markov decision process", "Recursive economics", "Shortest common supersequence", "Smith–Waterman algorithm", "Subset sum problem", "Viscosity solution", "Viterbi algorithm", "Word wrap"]}
 
 #@corpus = {}
 #@cats.each do |k,v|
 
 	c_add = "Dynamic Programming"
 
-	@corpus[c_add] = {}
+#	@corpus[c_add] = {}
 	puts @corpus
 
 	@cats[c_add].each do |t|
