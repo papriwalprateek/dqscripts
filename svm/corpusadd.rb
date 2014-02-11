@@ -1,18 +1,18 @@
 # encoding: UTF-8
 require 'google-search'
-#load "/home/papri/Downloads/git_work/dqscripts/algoboot.rb"
+load "/home/papri/Downloads/git_work/dqscripts/algoboot.rb"
 load '/home/papri/Downloads/git_work/dqscripts/svm/svm_predict.rb'
-load '/home/papri/Downloads/git_work/dqscripts/svm/corpus.rb'
+# load '/home/papri/Downloads/git_work/dqscripts/svm/corpus.rb'
 
 
-@cats = {"Dynamic Programming" => ["Partially observable Markov decision process", "Recursive economics", "Shortest common supersequence", "Smith–Waterman algorithm", "Subset sum problem", "Viscosity solution", "Viterbi algorithm", "Word wrap"]}
+#@cats = {"Dynamic Programming" => ["Partially observable Markov decision process", "Recursive economics", "Shortest common supersequence", "Smith–Waterman algorithm", "Subset sum problem", "Viscosity solution", "Viterbi algorithm", "Word wrap"]}
 
-#@corpus = {}
+@corpus = {}
 #@cats.each do |k,v|
 
-	c_add = "Dynamic Programming"
+	c_add = "Strings and pattern matching"
 
-#	@corpus[c_add] = {}
+	@corpus[c_add] = {}
 	puts @corpus
 
 	@cats[c_add].each do |t|
@@ -58,7 +58,7 @@ load '/home/papri/Downloads/git_work/dqscripts/svm/corpus.rb'
 	@carrier.each do |c|
 		pred = svm_predict(c["href"])
 		puts pred
-		if !@uniquelinks.join.include?(c["href"].gsub(/https:\/\/|http:\/\//,"")) and !(c["href"] =~ blackregex) and pred == 1.0 and @uniquelinks.length < 11
+		if !@uniquelinks.join.downcase.include?(c["href"].gsub(/https:\/\/|http:\/\//,"").downcase) and !(c["href"] =~ blackregex) and pred == 1.0 and @uniquelinks.length < 9
 	  		puts c["href"]
 			@resources << [c.text,c["href"]]			
 			@uniquelinks << c["href"]
