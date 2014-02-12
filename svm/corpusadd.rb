@@ -10,7 +10,7 @@ load '/home/papri/Downloads/git_work/dqscripts/svm/svm_predict.rb'
 @corpus = {}
 #@cats.each do |k,v|
 
-	c_add = "Strings and pattern matching"
+	c_add = "Combinatorial algorithms"
 
 	@corpus[c_add] = {}
 	puts @corpus
