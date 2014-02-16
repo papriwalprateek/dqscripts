@@ -32,7 +32,7 @@ end
 
 
 
-@sortcorpus = @corpus['Sequence sorting']
+@sortcorpus = @corpus['Dynamic Programming']
 
 @sortdesc = {}
 
