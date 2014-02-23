@@ -10,7 +10,7 @@ load '/home/papri/Downloads/git_work/dqscripts/svm/svm_predict.rb'
 @corpus = {}
 #@cats.each do |k,v|
 
-	c_add = "Combinatorial algorithms"
+	c_add = "Trees (data structure)"
 
 	@corpus[c_add] = {}
 	puts @corpus
@@ -25,7 +25,7 @@ load '/home/papri/Downloads/git_work/dqscripts/svm/svm_predict.rb'
 
 
 	whiteregex = /en.wikipedia|youtube|rosetta|geeksforgeeks|cprogramming.com|personal.kent|nist.gov|algolist|wikiversity|wolfram|programmingsimplified/
-	blackregex = /wikimedia|.pdf|.doc|.txt|.ppt|itunes|khanacademy|.gif|.pps|nanamic|freevbcode|scratched|download|reddit|interactivepython.org|google|yahoo|prezi|amazon|cyclopaedia|reference|researchgate|quitebasic|download|animated|compiledreams|facebook|sciencedirect|barnesandnoble|opensourcescripts|slideshare|sriptol|scribd|sourcecode|teachingtree|yahoo/
+	blackregex = /wikimedia|.pdf|.doc|.txt|.ppt|itunes|khanacademy|.gif|.pps|nanamic|freevbcode|scratched|download|reddit|interactivepython.org|google|yahoo|prezi|amazon|cyclopaedia|reference|researchgate|quitebasic|download|animated|compiledreams|facebook|sciencedirect|barnesandnoble|opensourcescripts|slideshare|sriptol|scribd|sourcecode|teachingtree|yahoo|.ps/
 
 
 	@resources = []

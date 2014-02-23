@@ -1,5 +1,7 @@
 load '/home/papri/Downloads/git_work/dqscripts/svm/corpus.rb'
 
+
+
 def nist_extract(url)
 	@doc = Nokogiri::HTML(open(url))
 	carrier = @doc.css('p')
