@@ -10,7 +10,7 @@ load '/home/papri/git_work/dqscripts/svm/svm_predict.rb'
 @corpus = {}
 #@cats.each do |k,v|
 
-	c_add = "Machine learning algorithms"
+	c_add = "Statistics"
 
 	@corpus[c_add] = {}
 	puts @corpus
