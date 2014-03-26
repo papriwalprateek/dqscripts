@@ -1,5 +1,5 @@
-load '/home/papri/Downloads/git_work/dqscripts/svm/labels.rb'
-load '/home/papri/Downloads/git_work/dqscripts/svm/svm_vector.rb'
+load '/home/papri/git_work/dqscripts/svm/labels.rb'
+load '/home/papri/git_work/dqscripts/svm/svm_vector.rb'
 require 'libsvm'
 
 

@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'google-search'
-load "/home/papri/Downloads/git_work/dqscripts/algoboot.rb"
-load '/home/papri/Downloads/git_work/dqscripts/svm/svm_predict.rb'
+load "/home/papri/git_work/dqscripts/algoboot.rb"
+load '/home/papri/git_work/dqscripts/svm/svm_predict.rb'
 # load '/home/papri/Downloads/git_work/dqscripts/svm/corpus.rb'
 
 
@@ -10,7 +10,7 @@ load '/home/papri/Downloads/git_work/dqscripts/svm/svm_predict.rb'
 @corpus = {}
 #@cats.each do |k,v|
 
-	c_add = "Trees (data structure)"
+	c_add = "Machine learning algorithms"
 
 	@corpus[c_add] = {}
 	puts @corpus
