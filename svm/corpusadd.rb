@@ -1,19 +1,19 @@
 # encoding: UTF-8
 require 'google-search'
-load "/home/papri/git_work/dqscripts/algoboot.rb"
+#load "/home/papri/git_work/dqscripts/algoboot.rb"
 load '/home/papri/git_work/dqscripts/svm/svm_predict.rb'
 # load '/home/papri/Downloads/git_work/dqscripts/svm/corpus.rb'
 
 
-#@cats = {"Dynamic Programming" => ["Partially observable Markov decision process", "Recursive economics", "Shortest common supersequence", "Smith–Waterman algorithm", "Subset sum problem", "Viscosity solution", "Viterbi algorithm", "Word wrap"]}
+@cats = {"Optimization algorithms" => ["Levenberg–Marquardt algorithm", "Nelder–Mead method", "Odds algorithm", "Simulated annealing", "Stochastic tunneling", "Subset sum problem"]}
 
-@corpus = {}
+#@corpus = {}
 #@cats.each do |k,v|
 
-	c_add = "Statistics"
+	c_add = "Optimization algorithms"
 
-	@corpus[c_add] = {}
-	puts @corpus
+#	@corpus[c_add] = {}
+#	puts @corpus
 
 	@cats[c_add].each do |t|
 		puts t
