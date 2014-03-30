@@ -1,4 +1,4 @@
-load '/home/papri/git_work/dqscripts/stringcorpus.rb'
+load '/home/papri/git_work/dqscripts/combcorpus.rb'
 
 
 
@@ -34,7 +34,7 @@ end
 
 
 
-@sortcorpus = @corpus['Strings and pattern matching']
+@sortcorpus = @corpus['Combinatorial algorithms']
 
 @sortdesc = {}
 
