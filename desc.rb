@@ -1,4 +1,4 @@
-load '/home/papri/Downloads/git_work/dqscripts/svm/corpus.rb'
+load '/home/papri/git_work/dqscripts/stringcorpus.rb'
 
 
 
@@ -34,7 +34,7 @@ end
 
 
 
-@sortcorpus = @corpus['Dynamic Programming']
+@sortcorpus = @corpus['Strings and pattern matching']
 
 @sortdesc = {}
 
