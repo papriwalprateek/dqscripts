@@ -2,11 +2,13 @@ require 'google-search'
 
 load "/home/papri/git_work/dqscripts/songboot.rb"
 
-temp = []
 i = 0
+
+@wikilist = []
+
 @toplist.each do |t|
 	
-	q = t[1] + ' ' + t[2] + ' ' + 'site:soundcloud.com'
+	q = t[1] + ' ' + t[2] + ' ' + 'wikipedia'
 	
 	@gpages = []
 	
@@ -19,14 +21,14 @@ i = 0
 	
 	temp = []
 	@gpages.each do |g|
-		if g.include?('soundcloud') and g.split('/').length == 5
+		if g.include?('wikipedia')
 			temp << g
 		end
 	end
-
-	t << [temp[0]]
 	
-	puts t[1] + ' ' + t[2]
+	@wikilist << temp[0]
+	
+	puts temp[0]
 	i = i + 1
 	puts i
 
