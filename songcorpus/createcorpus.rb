@@ -72,3 +72,64 @@ def audio_extract
 		puts i
 	end
 end
+
+def wikiintro
+	
+	@base.each do |b|
+		song_query = b[0].gsub(' ','_') + "_(" + b[1]['artist'].gsub(' ','_') + "_song)"
+		artist_query =  b[1]['artist'].gsub(' ','_')
+		
+		begin
+			@doc = Nokogiri::HTML(open('http://en.wikipedia.org/wiki/'+ song_query))
+			b[1]['song_wiki'] = 'http://en.wikipedia.org/wiki/'+ song_query
+		rescue
+			b[1]['song_wiki'] = nil
+		end
+		
+		begin
+			@doc = Nokogiri::HTML(open('http://en.wikipedia.org/wiki/'+ artist_query))
+			b[1]['artist_wiki'] = 'http://en.wikipedia.org/wiki/'+ artist_query
+		rescue
+			b[1]['artist_wiki'] = nil
+		end
+		
+		puts b[1]['song_wiki']
+		puts b[1]['artist_wiki']
+		
+	end
+	
+end
+
+
+def songmeaning
+	@list = {}
+	i = 0
+	@base.each do |t|
+	
+	q = t[0] + ' ' + t[1]['artist'] + ' ' + 'song meaning'
+	
+	@gpages = []
+	
+	Google::Search::Web.new(:query => q).each do |w|
+			@gpages << w.uri
+			if @gpages.length > 10
+				break
+			end
+	end
+	
+	
+	temp = []
+	@gpages.each do |g|
+		if g.include?('songmeaning')
+			temp << g
+		end
+	end
+	
+	@list[t[0]] = temp
+	
+	puts temp
+	i = i + 1
+	puts i
+	
+	end
+end
