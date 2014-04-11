@@ -1,4 +1,5 @@
 load '/home/papri/git_work/dqscripts/songcorpus/base.rb'
+load '/home/papri/git_work/dqscripts/songcorpus/list.rb'
 #load '/home/papri/git_work/dqscripts/songcorpus/lastfmcorpus.rb'
 
 #@base = {}
@@ -102,11 +103,12 @@ end
 
 
 def songmeaning
-	@list = {}
 	i = 0
-	@base.each do |t|
+	for i in 800..990
+	x = @base.keys[i]
+	t = @base[x]
 	
-	q = t[0] + ' ' + t[1]['artist'] + ' ' + 'song meaning'
+	q = x + ' ' + t['artist'] + ' ' + 'song meaning'
 	
 	@gpages = []
 	
@@ -125,7 +127,7 @@ def songmeaning
 		end
 	end
 	
-	@list[t[0]] = temp
+	@list[x] = temp
 	
 	puts temp
 	i = i + 1
