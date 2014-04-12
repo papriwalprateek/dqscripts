@@ -1,4 +1,4 @@
-load '/home/papri/git_work/dqscripts/songcorpus/base.rb'
+#load '/home/papri/git_work/dqscripts/songcorpus/base.rb'
 load '/home/papri/git_work/dqscripts/songcorpus/list.rb'
 #load '/home/papri/git_work/dqscripts/songcorpus/lastfmcorpus.rb'
 
@@ -61,7 +61,7 @@ end
 
 def audio_extract 
 	
-	for i in 212..999
+	for i in 221..999
 		x = @base.keys[i]
 		b = @base[x]
 		q = x + " by " + b['artist']
