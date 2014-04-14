@@ -1,5 +1,5 @@
-#load '/home/papri/git_work/dqscripts/songcorpus/base.rb'
-load '/home/papri/git_work/dqscripts/songcorpus/list.rb'
+load '/home/papri/git_work/dqscripts/songcorpus/base.rb'
+#load '/home/papri/git_work/dqscripts/songcorpus/list.rb'
 #load '/home/papri/git_work/dqscripts/songcorpus/lastfmcorpus.rb'
 
 #@base = {}
@@ -104,6 +104,7 @@ end
 
 def songmeaning
 	i = 0
+	@list = {}
 	for i in 800..990
 	x = @base.keys[i]
 	t = @base[x]
@@ -122,12 +123,49 @@ def songmeaning
 	
 	temp = []
 	@gpages.each do |g|
-		if g.include?('songmeaning')
+		if g.include?('songfacts')
 			temp << g
 		end
 	end
 	
 	@list[x] = temp
+	
+	puts temp
+	i = i + 1
+	puts i
+	
+	end
+end
+
+
+
+def songfacts
+	i = 0
+	@list = {}
+	for i in 0..990
+	x = @base.keys[i]
+	t = @base[x]
+	
+	q = x + ' ' + t['artist'] + ' ' + 'songfacts'
+	
+	@gpages = []
+	
+	Google::Search::Web.new(:query => q).each do |w|
+			@gpages << w.uri
+			if @gpages.length > 10
+				break
+			end
+	end
+	
+	
+	temp = []
+	@gpages.each do |g|
+		if g.include?('songfacts')
+			temp << g
+		end
+	end
+	
+	@list[x] = temp[0]
 	
 	puts temp
 	i = i + 1
