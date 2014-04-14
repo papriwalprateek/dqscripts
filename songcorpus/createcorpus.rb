@@ -173,3 +173,13 @@ def songfacts
 	
 	end
 end
+
+
+def musicnews
+	@base.each do |b|
+		faroo = "http://www.faroo.com/api?q="+b[1]['artist'].gsub(' ','+')+"+song&start=1&length=10&l=en&src=news&f=xml&key=xk8c-uC-nZcNzm9O08Z2NOM1ff0_"
+		usatod = "http://www.usatoday.com/search/"+URI.encode(b[1]['artist'])+"/"
+		b[1]['artistnews'] = [usatod,faroo]
+	end
+	
+end
