@@ -87,3 +87,35 @@ def audio_extract
 		puts i
 	end
 end
+
+
+def lyrics
+	i = 0
+	@list = {}
+	for i in 0..39
+	x = @bollycorpus.keys[i]
+	t = @bollycorpus[x]
+	
+	q = x + ' ' + t['album'] + ' '+ 'lyrics'
+	
+	@doc = Nokogiri::HTML(open('http://www.lyricsmint.com/search?q=' + q.gsub(' ','+')))
+	tempurls = []
+	
+	@doc.css('div.post-title a').each do |a|
+		tempurls << a['href']
+	end
+	
+	tempurls.each do |t|
+		@doc = Nokogiri::HTML(open(t))
+		
+		if @doc.css('div#lyric')[0] != nil
+			@list[x] = t
+			break
+		end
+	end
+	
+	puts x
+	puts @list[x]
+	
+	end
+end

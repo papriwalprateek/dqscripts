@@ -48,3 +48,11 @@ def faroomusic(url)
 	results = @doc.css('result')
 	
 end
+
+def lyricsmint(url)
+	@doc = Nokogiri::HTML(open(url))
+	@lyrics = @doc.css('div#lyric')
+	x = @lyrics.css('h2')
+	x.remove
+	return @lyrics
+end
