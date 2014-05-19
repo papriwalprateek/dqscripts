@@ -27,7 +27,7 @@ def svm_predict(url)
 	y = DQReadability::Document.new(url,:tags=>%w[div pre p h1 h2 h3 h4 td table tr b a img br li ul ol center br hr blockquote em strong sup sub],:attributes=>%w[href src align width color]).content
 	File.open('/home/papri/x2.html','w'){|file| file.write(y)}
 	y = Nokogiri::HTML(open('/home/papri/x2.html'))
-	termregex = /algorithm|element|value|\>|\<|\=|\-|code|complexity|graph|psuedo|program/
+	termregex = /program|software|hardware|memory|design/
 	tc = 0
 	@terms = y.text.split(/ |,|\?/)
 	@terms.each do |t|
