@@ -1,21 +1,21 @@
 require 'google-search'
 load '/home/papri/git_work/dqscripts/svm/svm_predict.rb'
-load '/home/papri/git_work/dqscripts/oscorpus/osboot.rb'
+#load '/home/papri/git_work/dqscripts/oscorpus/osboot.rb'
 
-#@entities = {"Basic Concepts" => ['Operating system']}
+@entities = {"Basic Concepts" => ["Deadlock (computing)"]}
 
-@corpus = {}
+#@corpus = {}
 
-@entities.each do |k,v|
+#@entities.each do |k,v|
 
-	@corpus[k] = {}
-	puts @corpus
+#	@corpus[k] = {}
+#	puts @corpus
 
-	v.each do |t|
+	@entities['Basic Concepts'].each do |t|
 		puts t
 		@gpages = []
 
-		Google::Search::Web.new(:query => t+' in operating system').each do |w|
+		Google::Search::Web.new(:query => t).each do |w|
 			@gpages << [w.title,w.uri]
 		end 
 
@@ -47,7 +47,7 @@ load '/home/papri/git_work/dqscripts/oscorpus/osboot.rb'
 	end
 
 # Duckduckgo results extraction
-	u = "https://api.duckduckgo.com/html?q="+t.gsub(/ |_/,"+")+"+in+operating+system"
+	u = "https://api.duckduckgo.com/html?q="+t.gsub(/ |_/,"+")
 	puts u
 	@doc = Nokogiri::HTML(open(URI.encode(u)))
 	x = @doc.css(".web-result-sponsored")
@@ -65,7 +65,7 @@ load '/home/papri/git_work/dqscripts/oscorpus/osboot.rb'
 		end
 	end
 
-	@corpus[k][t] = @resources
+	@corpus['Basic Concepts'][t] = @resources
 
-end
-end
+	end
+#end
