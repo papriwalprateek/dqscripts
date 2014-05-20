@@ -1,21 +1,21 @@
 require 'google-search'
 load '/home/papri/git_work/dqscripts/svm/svm_predict.rb'
-#load '/home/papri/git_work/dqscripts/oscorpus/osboot.rb'
+load '/home/papri/git_work/dqscripts/oscorpus/osboot.rb'
 
-@entities = {"Basic Concepts" => ["Deadlock (computing)"]}
+#@entities = {"Basic Concepts" => ["Deadlock (computing)"]}
 
-#@corpus = {}
+@corpus = {}
 
-#@entities.each do |k,v|
+@entities.each do |k,v|
 
-#	@corpus[k] = {}
-#	puts @corpus
+	@corpus[k] = {}
+	puts @corpus
 
 	@entities['Basic Concepts'].each do |t|
 		puts t
 		@gpages = []
 
-		Google::Search::Web.new(:query => t).each do |w|
+		Google::Search::Web.new(:query => t + "lecture").each do |w|
 			@gpages << [w.title,w.uri]
 		end 
 
@@ -65,7 +65,7 @@ load '/home/papri/git_work/dqscripts/svm/svm_predict.rb'
 		end
 	end
 
-	@corpus['Basic Concepts'][t] = @resources
+	@corpus[k][t] = @resources
 
 	end
-#end
+end
