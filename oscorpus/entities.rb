@@ -1,27 +1,38 @@
-User Interface
-Command Line
-Graphics User Interface
-Resource Alloction
-Bourne Shell Command Interpreter
-System Calls
-MS-DOS
-Command Interpreter
-Free BSD
-System Programs
-Registry operating system
-Unix System Structure
-Layered System Structure
-Microkernel System Structure
-Hybrid operating system
-Mac OS X Structure
-Cocoa Touch
-Android Architecture
-Debugging
-Core dump
-Crash Dump
-Profiling
-Dtrace
-Sysgen
-System boot
-Bootstrap loader
-Grub
+Interprocess Communication
+Process Scheduling
+Batch processing
+Process State
+Process Control Block
+program counter
+Context Switch
+Thread (computing)
+Job queue
+Ready queue
+CPU scheduler
+Job scheduler
+Medium Term Scheduler
+Process Creation
+Process Identifier
+Process Temination
+Multiprocess Architecture
+Producer Consumer Problem
+Shared Memory
+Message Passing
+Buffering
+POSIX
+Socket
+Remote Procedure Calls
+Pipes (operating system)
+Multicore Programming
+Parallelism (computer architecture)
+Concurrent (computer architecture)
+Multithreaded Proces
+Single Threaded Process
+Amdahl's Law
+User Threads
+Kernel Threads
+Pthreads
+Thread Pool
+Grand Central Approach
+Thread-Local Storage
+Schedular Activations

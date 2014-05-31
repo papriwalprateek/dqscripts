@@ -1,18 +1,18 @@
 require 'google-search'
 load '/home/papri/git_work/dqscripts/svm/svm_predict.rb'
-load '/home/papri/git_work/dqscripts/oscorpus/osboot.rb'
-load '/home/papri/git_work/dqscripts/oscorpus/corpus.rb'
+#load '/home/papri/git_work/dqscripts/oscorpus/osboot.rb'
+#load '/home/papri/git_work/dqscripts/oscorpus/corpus.rb'
 
-#@entities = {'Operating System Structure' => ["Free BSD", "System Programs", "Registry operating system", "Unix System Structure", "Layered System Structure", "Microkernel System Structure", "Hybrid operating system", "Mac OS X Structure", "Cocoa Touch", "Android Architecture", "Debugging", "Core dump", "Crash Dump", "Profiling (operating system)", "Dtrace", "Sysgen", "System boot", "Bootstrap loader", "Grub"]}
+@entities = {'Processes and Threads' => ["Process Control Block", "program counter", "Context Switch", "Thread (computing)", "Job queue", "Ready queue", "CPU scheduler", "Job scheduler", "Medium Term Scheduler", "Process Creation", "Process Identifier", "Process Temination", "Multiprocess Architecture", "Producer Consumer Problem", "Shared Memory", "Message Passing", "Buffering", "POSIX", "Socket", "Remote Procedure Calls", "Pipes (operating system)", "Multicore Programming", "Parallelism (computer architecture)", "Concurrent (computer architecture)", "Multithreaded Proces", "Single Threaded Process", "Amdahl's Law", "User Threads", "Kernel Threads", "Pthreads", "Thread Pool", "Grand Central Approach", "Thread-Local Storage", "Schedular Activations"]}
 
 #@corpus = {}
 
 #@entities.each do |k,v|
 
-	@corpus['Operating System Structure'] = {}
+#	@corpus['Processes and Threads'] = {}
 	puts @corpus
 
-	@entities['Operating System Structure'].each do |t|
+	@entities['Processes and Threads'].each do |t|
 		puts t
 		@gpages = []
 
@@ -46,6 +46,7 @@ load '/home/papri/git_work/dqscripts/oscorpus/corpus.rb'
 			end
 		end
 	end
+	
 # Duckduckgo results extraction
 	u = "https://api.duckduckgo.com/html?q="+t.gsub(/ |_/,"+")
 	puts u
@@ -64,7 +65,7 @@ load '/home/papri/git_work/dqscripts/oscorpus/corpus.rb'
 			@uniquelinks << c["href"]
 		end
 	end
-	@corpus['Operating System Structure'][t] = @resources
+	@corpus['Processes and Threads'][t] = @resources
 
 	end
 #end
