@@ -1,21 +1,22 @@
 require 'google-search'
 load '/home/papri/git_work/dqscripts/svm/svm_predict.rb'
 load '/home/papri/git_work/dqscripts/oscorpus/osboot.rb'
+load '/home/papri/git_work/dqscripts/oscorpus/corpus.rb'
 
-#@entities = {"Basic Concepts" => ["Deadlock (computing)"]}
+#@entities = {'Operating System Structure' => ["Free BSD", "System Programs", "Registry operating system", "Unix System Structure", "Layered System Structure", "Microkernel System Structure", "Hybrid operating system", "Mac OS X Structure", "Cocoa Touch", "Android Architecture", "Debugging", "Core dump", "Crash Dump", "Profiling (operating system)", "Dtrace", "Sysgen", "System boot", "Bootstrap loader", "Grub"]}
 
-@corpus = {}
+#@corpus = {}
 
-@entities.each do |k,v|
+#@entities.each do |k,v|
 
-	@corpus[k] = {}
+	@corpus['Operating System Structure'] = {}
 	puts @corpus
 
-	@entities['Basic Concepts'].each do |t|
+	@entities['Operating System Structure'].each do |t|
 		puts t
 		@gpages = []
 
-		Google::Search::Web.new(:query => t + "lecture").each do |w|
+		Google::Search::Web.new(:query => t).each do |w|
 			@gpages << [w.title,w.uri]
 		end 
 
@@ -45,7 +46,6 @@ load '/home/papri/git_work/dqscripts/oscorpus/osboot.rb'
 			end
 		end
 	end
-
 # Duckduckgo results extraction
 	u = "https://api.duckduckgo.com/html?q="+t.gsub(/ |_/,"+")
 	puts u
@@ -64,8 +64,7 @@ load '/home/papri/git_work/dqscripts/oscorpus/osboot.rb'
 			@uniquelinks << c["href"]
 		end
 	end
-
-	@corpus[k][t] = @resources
+	@corpus['Operating System Structure'][t] = @resources
 
 	end
-end
+#end
