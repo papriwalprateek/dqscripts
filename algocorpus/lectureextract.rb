@@ -4,12 +4,13 @@ require 'google-search'
 load '/home/papri/git_work/dqscripts/algocorpus/mongoentities.rb'
 
 def lectures
-	@corpus = {}
-	t = 0
-	@mongoties.each do |k|
+#	@corpus = {}
+#	@mongoties.each do |k|
+
+	for i in 339..424
+	k = @mongoties[i]
 	@corpus[k] = []
-	t = t + 1
-	puts t.to_s + " " + k
+	puts i.to_s + " " + k
 	@gpages = []
 	Google::Search::Web.new(:query => k.gsub('â€“','-')).each do |w|
 			@gpages << [w.title,w.uri]
