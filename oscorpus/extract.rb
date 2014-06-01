@@ -15,13 +15,19 @@ def lectures
 		puts t
 		@gpages = []
 
-		Google::Search::Web.new(:query => t + "lecture").each do |w|
+		Google::Search::Web.new(:query => t + " lecture").each do |w|
+			puts "hi enter"
 			@gpages << [w.title,w.uri]
+			puts "hi"
+			puts w.uri
 		end
+	
+	puts @gpages
 	
 	@resources = []
 	
 	10.times do |j|
+		puts "hi"
 		puts @gpages[j][1]
 		@resources << @gpages[j]
 	end
