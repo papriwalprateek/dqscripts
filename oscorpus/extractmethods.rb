@@ -1,6 +1,10 @@
+# This file contains extraction methods which extract content from lecturecorpus and classifies it.
+
 load '/home/papri/git_work/dqscripts/oscorpus/osboot.rb'
 load '/home/papri/git_work/dqscripts/oscorpus/oscorpus.rb'
 load '/home/papri/git_work/dqscripts/oscorpus/lecturecorpus.rb'
+load '/home/papri/git_work/dqscripts/oscorpus/corpus.rb'
+load '/home/papri/git_work/dqscripts/svm/svm_predict.rb'
 
 def video(key,cat)
 	yt = []
@@ -31,5 +35,23 @@ def lecturestuff(cat)
 		@oscorpus[cat][t[0]]['video_yt'] = c
 		c = lectures(t[0],cat)
 		@oscorpus[cat][t[0]]['lectures'] = c
+	end
+end
+
+def webarticles(cat)
+	formatregex = /.pdf|.ppt|.ps|.pps|youtube/
+	@lecturecorpus[cat].each do |k,v|
+		puts k
+		v.each do |t|
+			if t[1] =~ formatregex
+			else
+				pred = svm_predict(t[1])
+				if pred == 1.0 or t[1].include?('freevideolectures')
+				puts t[1]
+				@corpus[cat][k] << t
+				end
+			end
+
+		end
 	end
 end
