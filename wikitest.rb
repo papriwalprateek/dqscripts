@@ -1,4 +1,4 @@
-a="http://en.wikipedia.org/wiki/Red%E2%80%93black_tree"
+a="http://en.wikipedia.org/wiki/Gauss%E2%80%93Newton_algorithm"
 out_details=[]   #same work as @arr but only for this code
 @pseudocode=nil
 @math=nil
@@ -243,5 +243,5 @@ if a
             
             @arr<<"code"
         end
-        
+       puts "pkjkjkjkj" 
     end
