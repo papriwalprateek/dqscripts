@@ -1,4 +1,4 @@
-a="http://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X"
+a=property_url
 
 out_details=[]   #same work as @arr but only for this code
 @pseudocode=[]
@@ -77,10 +77,22 @@ if a
             doc = Nokogiri::HTML(open("http://en.wikipedia.org/wiki/"+a))
         end
 
-        rem_nodes = ['table.ambox','.portal','table.infobox','table.vertical-navbox','div.thumbinner','span.mw-editsection','div#toc','table.navbox','table.metadata','//comment()']        
+        rem_nodes = ['table.ambox','.portal','table.infobox','table.vertical-navbox','div.thumbinner','span.mw-editsection','div#toc','table.navbox','table.metadata','//comment()','sup.reference']
         rem_nodes.each do |r|
 			x = doc.css(r)
 			x.remove
+        end
+        
+        uri = URI.parse(a)
+        base = "#{uri.scheme}://#{uri.host}"
+        doc.css('a').each do |l|
+			if l['href']
+			if l['href'][0] == "#"
+				l['href'] = a + l['href']
+			elsif l['href'][0] == '/'
+				l['href'] = base + l['href']
+			end
+			end
         end
         
         # wiki_definition
@@ -100,47 +112,16 @@ if a
             @arr<<"algo_description"
             show_content(@wiki_definition)
         end
-       
-        # Mathematical Insights
-        
-		math_tags = ["solving","combinatorics","math","proof","relation","formulas","correctness"]  # This is tag array which empowers the math method
 		
-		htag = find_htag(doc,math_tags)
-        
-        if htag >= 0
-            node = doc.css("h2 > span")[htag].parent
-            stop = doc.css("h2 > span")[htag+1].parent
-			
-            @math = nodesextract(doc,node,stop)            
-        end
-        
-        if @math != []
-            @arr<<"math_analysis"
-            out_details<<"math_analysis"
-            puts "math"
-            show_content(@math)
-        end
-        
-        # Algo Complexity
-        
-		cmplx_tags = ["efficiency","complexity","time","analysis","best","worst","average"]  # This is array of semantic tags which tags content related to algorithm complexity
-
-		htag = find_htag(doc,cmplx_tags)
-
-        if htag >= 0
-            node = doc.css("h2 > span")[htag].parent
-            stop = doc.css("h2 > span")[htag+1].parent
-            @cmplx = nodesextract(doc,node,stop)
-        end
-                
+		store_htags = [] # This stores the unique htags to avoid any repetitive content. This problem is present in LIS algorithm
+		
         # Algorithm
                 
-        algo_tags = ["algorithm","definition","description","encoding","overview","operation"]
-        
+        algo_tags = ["algorithm","definition","description","encoding","overview","operation","description","example"]
         htag = find_htag(doc,algo_tags)
-            
-        if htag >= 0
-            
+        
+        if htag >= 0 and !store_htags.include?(htag)
+			store_htags << htag
             node = doc.css("h2 > span")[htag].parent
             begin
             stop = doc.css("h2 > span")[htag+1].parent
@@ -149,6 +130,19 @@ if a
             end
             @algorithm = nodesextract(doc,node,stop)
         end
+                
+        # Algo Complexity
+        
+		cmplx_tags = ["efficiency","complexity","time","analysis","best","worst","average"]  # This is array of semantic tags which tags content related to algorithm complexity
+
+		htag = find_htag(doc,cmplx_tags)
+
+        if htag >= 0 and !store_htags.include?(htag)
+			store_htags << htag
+            node = doc.css("h2 > span")[htag].parent
+            stop = doc.css("h2 > span")[htag+1].parent
+            @cmplx = nodesextract(doc,node,stop)
+        end    
         
         if @algorithm != [] or @cmplx != []
             @arr<<"algo_examples"
@@ -157,15 +151,14 @@ if a
             puts "complexity"
             show_content(@cmplx)
         end
-        
-        
+
         # Pseudocode
         
         pseudocode_tags = ["pseudocode","implementation"]
 		htag = find_htag(doc,pseudocode_tags)
 
-        if htag >= 0
-            
+        if htag >= 0 and !store_htags.include?(htag)
+			store_htags << htag
             node = doc.css("h2 > span")[htag].parent
             begin
 				stop = doc.css("h2 > span")[htag+1].parent
@@ -180,7 +173,26 @@ if a
             puts "pseudocode"
             show_content(@pseudocode)
         end
-       puts "Code ends here" 
-       puts @arr
-       @doc = doc
+		# Mathematical Insights
+        
+		math_tags = ["solving","combinatorics","math","proof","relation","formulas","correctness"]  # This is tag array which empowers the math method
+		
+		htag = find_htag(doc,math_tags)
+        
+        if htag >= 0 and !store_htags.include?(htag)
+			store_htags << htag
+            node = doc.css("h2 > span")[htag].parent
+            stop = doc.css("h2 > span")[htag+1].parent			
+            @math = nodesextract(doc,node,stop)            
+        end
+        
+        if @math != []
+            @arr<<"math_analysis"
+            out_details<<"math_analysis"
+            puts "math"
+            show_content(@math)
+        end
+		puts "Code ends here" 
+		puts @arr
+		@doc = doc
 end
