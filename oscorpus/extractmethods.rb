@@ -5,6 +5,7 @@ load '/home/papri/git_work/dqscripts/oscorpus/oscorpus.rb'
 load '/home/papri/git_work/dqscripts/oscorpus/lecturecorpus.rb'
 load '/home/papri/git_work/dqscripts/oscorpus/corpus.rb'
 load '/home/papri/git_work/dqscripts/svm/svm_predict.rb'
+load '/home/papri/git_work/dqscripts/oscorpus/articlecorpus.rb'
 
 def video(key,cat)
 	yt = []
@@ -54,4 +55,8 @@ def webarticles(cat)
 
 		end
 	end
+end
+
+
+def techtarget(cat)
 end

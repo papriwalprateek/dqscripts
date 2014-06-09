@@ -1,17 +1,19 @@
 def webopedia_extract(url)
-	@doc = Nokogiri::HTML(open(url))
-	@carrier = []
-	@carrier << @doc.css('h1')
-	start = @doc.css('div.article_related_items')[0]
-	stop = @doc.css('div#olal-container')	
-	node = start
+	doc = Nokogiri::HTML(open(url))
+	carrier = []
+	x = doc.css('//comment()')
+	x.remove
+#	carrier << doc.css('h1')
+	start = doc.css('div.article_related_items')[0]
+	stop = doc.css('div#olal-container')	
+	node = start.next
 
 	while node != stop[0]
+		carrier << node
 		node = node.next
-		@carrier << node
 	end
 	
-	return @carrier
+	return carrier
 
 end
 
@@ -45,4 +47,25 @@ end
 def technopedia_extract(url)
 	Extract(url,[['div.techopedia_intellitxt',0]])
 	return @content
+end
+
+
+def techtarget_extract(url)
+	doc = Nokogiri::HTML(open(url))
+	carrier = []
+#	carrier << doc.css('h1')
+	x = doc.css('//comment()')
+	x.remove
+	start = doc.css('div#articleBody p')[0]
+	stop = doc.css('div#relatedGlossaryTerms')[0].parent
+	node = start
+
+	while node != stop
+		carrier << node
+		puts node.text
+		node = node.next
+	end
+	
+	return carrier
+
 end
