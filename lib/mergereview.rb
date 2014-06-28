@@ -1,7 +1,7 @@
 def merge_review(id,property = "resources")
 	
 	ur = Entity.find(id)
-	regex = Regexp.new(ur.parent_query+'$','i') 
+	regex = /#{Regexp.escape(ur.parent_query)}/i
 	parent_entity = Entity.find_by(query:regex)
 	
 	puts "updating under_review entity"
